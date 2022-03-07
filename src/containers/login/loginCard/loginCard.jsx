@@ -19,9 +19,6 @@ const LoginCard = () => {
           </button>
         </div>
       </form>
-      <div className={classes.loginLink}>
-        New User? <span>REGISTER NOW</span>
-      </div>
     </div>
   );
 };
