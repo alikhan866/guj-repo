@@ -1,6 +1,8 @@
 import React from "react";
 import classes from "./bottomNav.module.scss";
+import { useNavigate } from "react-router-dom";
 const BottomNav = () => {
+  const navigate = useNavigate();
   return (
     <div className={classes.container}>
       <div className={classes.navWrapper}>
@@ -16,7 +18,7 @@ const BottomNav = () => {
         </div>
 
         <div className={classes.loginWrapper}>
-          <button className={classes.loginBtn}>
+          <button onClick={() => navigate("/")} className={classes.loginBtn}>
             Login <i className="fa-solid fa-caret-down"></i>
           </button>
         </div>
