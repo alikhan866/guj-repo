@@ -22,6 +22,13 @@ const GujaratMap = ({ selectedDistrict, setSelectedDistrict }) => {
     // eslint-disable-next-line
   }, [currentDistrict]);
 
+  useEffect(() => {
+    // onStateClick("Ahemdabad");
+    const element = document.getElementById("Ahmedabad");
+    onStateClick(element);
+    console.log("qweqw", element);
+  }, []);
+
   const onStateClick = (clickedDistrict) => {
     console.log(clickedDistrict.getAttribute("id"));
     if (currentDistrict !== clickedDistrict.getAttribute("id")) {
