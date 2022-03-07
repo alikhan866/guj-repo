@@ -1,0 +1,50 @@
+@import "../../../assets/css/global.scss";
+
+.mainContainer {
+  background-color: $greyLight;
+  width: 100%;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.headerContainer {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.header {
+  color: $error;
+  font-weight: 500;
+}
+
+.subHeader {
+  color: $success;
+  font-weight: 500;
+}
+
+.rtiContainer {
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.rti {
+  margin-right: 15px;
+}
+
+.rti,
+.department,
+.policies {
+  font-size: 14px;
+  font-weight: 500;
+  color: $greyMediumDark;
+}
+
+.policiesContainer {
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,0 +1,83 @@
+@import "../../assets/css/global.scss";
+
+.container {
+  padding: 90px 0 120px;
+  background-color: $primary;
+  @include flex-center-columns;
+}
+.mainWrapper {
+  width: 76%;
+  margin: 0 auto;
+  @include flex-center;
+  align-items: flex-start;
+  gap: 70px;
+}
+.titleWrapper {
+  @include flex-center-columns;
+  align-items: flex-start;
+  gap: 20px;
+  width: 60%;
+}
+.registerCardWrapper {
+  @include flex-center-columns;
+  gap: 30px;
+  width: 30%;
+}
+.title {
+  font-size: 32px;
+  color: $white;
+  font-weight: 800;
+  line-height: 1.25;
+  text-align: left;
+}
+.statsMainWrapper {
+  @include flex-center;
+  gap: 45px;
+}
+.statsWrapper {
+  @include flex-center-columns;
+  gap: 5px;
+}
+.statsValue {
+  color: $white;
+  letter-spacing: 2px;
+  font-size: 24px;
+  font-weight: 700;
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 5px;
+}
+.statsText {
+  color: $greyBluish;
+  font-size: 14px;
+  font-weight: 400;
+}
+.paragraph {
+  color: $greyBluish;
+  font-size: 18px;
+  font-weight: 300;
+  text-align: left;
+  width: 60ch;
+  line-height: 1.75;
+}
+.info {
+  color: $white;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: left;
+  line-height: 1.7;
+
+  & span {
+    color: $secondary;
+    text-decoration: 2px underline $secondary;
+    transition: $animate;
+
+    &:hover {
+      color: $secondaryLight;
+      text-decoration: 2px underline $secondaryLight;
+      transition: $animate;
+      cursor: pointer;
+    }
+  }
+}

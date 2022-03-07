@@ -1,0 +1,153 @@
+@import "../../assets/css/global.scss";
+
+.container {
+  padding: 40px 0 70px;
+  background-color: white;
+  @include flex-center-columns;
+}
+.mainWrapper {
+  width: 80%;
+  margin: 0 auto;
+  @include flex-center-columns;
+  gap: 30px;
+}
+.title {
+  font-size: 36px;
+  font-weight: 700;
+  color: $primary;
+  @include flex-center;
+  gap: 15px;
+
+  & span {
+    @include box(150px, 5px);
+    background-color: $secondary;
+  }
+}
+.districtWrapper {
+  @include flex-center;
+  width: 100%;
+  gap: 50px;
+}
+.districtMap {
+  width: 60%;
+}
+.districtDesc {
+  @include flex-center-columns;
+  align-items: flex-start;
+  width: 40%;
+}
+.districtName {
+  font-size: 28px;
+  font-weight: 400;
+  color: $primary;
+  width: 100%;
+  line-height: 1.5;
+  text-align: left;
+}
+.paragraph {
+  font-size: 18px;
+  font-weight: 400;
+  color: $primary;
+  width: 100%;
+  margin: 30px 0;
+  line-height: 1.67;
+  text-align: left;
+}
+
+.btnWrapper {
+  width: 100%;
+  margin: 0;
+  & .primaryTransparentBtn {
+    @include button-primary;
+    padding: 10px 15px;
+    padding-left: 0;
+    font-size: 18px;
+    font-weight: 300;
+    font-family: "Poppins";
+    @include flex-center;
+    gap: 10px;
+    border: 2px solid transparent;
+    background-color: transparent;
+    text-transform: uppercase;
+    border-radius: 0;
+    width: fit-content;
+    margin: 0;
+    color: $primaryGreyish;
+
+    &:hover {
+      border-bottom: 2px solid $greyLight;
+      transition: $animate;
+      cursor: pointer;
+    }
+    &:active {
+      @include light-active;
+      padding-left: 15px;
+    }
+  }
+}
+.districtListWrapper {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  row-gap: 20px;
+  column-gap: 20px;
+}
+.districtList {
+  color: $primary;
+  font-size: 17px;
+  font-weight: 300;
+  @include flex-center;
+  justify-content: flex-start;
+  gap: 10px;
+  transition: $animate;
+
+  & span {
+    @include box(25px);
+    @include flex-center;
+    border-radius: 5px;
+    font-size: 15px;
+    background-color: $grey;
+    transition: $animate;
+    color: $white;
+  }
+
+  &:hover {
+    cursor: pointer;
+    transition: $animate;
+    transform: scale(1.05);
+
+    & span {
+      background-color: lighten($grey, 10%);
+      transition: $animate;
+    }
+  }
+}
+.selectedDistrictList {
+  color: $primary;
+  font-size: 17px;
+  font-weight: 300;
+  @include flex-center;
+  justify-content: flex-start;
+  gap: 10px;
+  transition: $animate;
+
+  &:hover {
+    cursor: pointer;
+    transition: $animate;
+    transform: scale(1.05);
+
+    & span {
+      background-color: darken($secondary, 10%);
+      transition: $animate;
+    }
+  }
+
+  & span {
+    @include box(25px);
+    @include flex-center;
+    border-radius: 5px;
+    font-size: 15px;
+    background-color: $secondary;
+    transition: $animate;
+    color: $white;
+  }
+}

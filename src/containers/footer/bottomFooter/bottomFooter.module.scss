@@ -1,0 +1,23 @@
+@import "../../../assets/css/global.scss";
+
+.mainContainer {
+  background-color: $greyMediumDark;
+  width: 100%;
+  padding: 5px 0;
+}
+
+.container {
+  display: flex;
+  width: 80%;
+  margin: auto;
+  justify-content: space-between;
+}
+
+.text {
+  font-size: 13px;
+  font-weight: 500;
+  color: $white;
+  &:hover {
+    cursor: default;
+  }
+}

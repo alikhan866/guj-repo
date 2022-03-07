@@ -1,0 +1,312 @@
+@charset "UTF-8";
+
+// Colors
+
+$white: hsl(0, 100%, 99%);
+$black: hsl(0, 0%, 11%);
+$error: hsl(350, 100%, 56%);
+$success: hsl(166, 100%, 30%);
+$info: hsl(218, 100%, 50%);
+
+$primary: hsl(20, 56%, 19%);
+$primaryDark: hsl(199, 14%, 12%);
+$primaryMedium: hsl(199, 38%, 20%);
+$primaryLight: hsl(199, 23%, 32%);
+$primaryGreyish: hsl(199, 24%, 22%);
+$primaryLightText: hsla(199, 62%, 14%, 0.133);
+$primaryInverted: hsl(199, 62%, 86%);
+
+$secondary: hsl(32, 87%, 50%);
+$secondaryLight: hsl(17, 100%, 50%);
+$secondaryDark: hsl(27, 100%, 50%);
+
+$accent: hsl(351, 100%, 61%);
+$accentLight: hsl(351, 100%, 76%);
+$accentMedium: hsl(351, 80%, 61%);
+$accentDark: hsl(351, 100%, 48%);
+$accentInverted: hsl(171, 100%, 39%);
+
+$grey: hsl(199, 11%, 46%);
+$greyDark: hsl(240, 8%, 23%);
+$greyMediumDark: hsl(0, 0%, 40%);
+$greyMediumLight: hsl(0, 0%, 75%);
+$greyLight: hsl(197, 9%, 85%);
+$greyBluish: hsl(240, 29%, 89%);
+$greyBluishDark: hsl(232, 17%, 56%);
+
+// Utils
+
+$animate: all 0.25s linear;
+
+// Media Queries
+
+$breakpoints: (
+  "phone-small": 380px,
+  "phone": 480px,
+  "phone-wide": 576px,
+  "tablet-small": 640px,
+  "tablet": 768px,
+  "tablet-wide": 1024px,
+  "desktop": 1248px,
+  "desktop-wide": 1440px,
+);
+
+// Mixins
+
+@mixin mq($width, $type: max) {
+  @if map_has_key($breakpoints, $width) {
+    $width: map_get($breakpoints, $width);
+    @if $type == max {
+      $width: $width - 1px;
+    }
+    @media only screen and (#{$type}-width: $width) {
+      @content;
+    }
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin flex-center-columns {
+  @include flex-center;
+  flex-direction: column;
+}
+@mixin placeholder {
+  &.placeholder {
+    @content;
+  }
+  &:-moz-placeholder {
+    @content;
+  }
+  &::-moz-placeholder {
+    @content;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
+  &::-webkit-input-placeholder {
+    @content;
+  }
+}
+@mixin text-shorten($numLines: 1) {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+  @supports (-webkit-line-clamp: $numLines) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: initial;
+    display: -webkit-box;
+    -webkit-line-clamp: $numLines;
+    -webkit-box-orient: vertical;
+  }
+}
+@mixin gradient($start-color, $end-color, $orientation) {
+  background: $start-color;
+  @if $orientation == "vertical" {
+    background: -webkit-linear-gradient(top, $start-color, $end-color);
+    background: linear-gradient(to bottom, $start-color, $end-color);
+  } @else if $orientation == "horizontal" {
+    background: -webkit-linear-gradient(left, $start-color, $end-color);
+    background: linear-gradient(to right, $start-color, $end-color);
+  } @else {
+    background: -webkit-radial-gradient(center, ellipse cover, $start-color, $end-color);
+    background: radial-gradient(ellipse at center, $start-color, $end-color);
+  }
+}
+@mixin center-vertically {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  @include prefix(transform, translate(-50%, -50%), "webkit" "ms");
+}
+@mixin position($position, $args) {
+  @each $o in top right bottom left {
+    $i: index($args, $o);
+    @if $i and $i + 1 <= length($args) and type-of(nth($args, $i + 1)) == number {
+      #{$o}: nth($args, $i + 1);
+    }
+  }
+  position: $position;
+}
+
+// Positioning helpers
+@mixin absolute($args: "") {
+  @include position(absolute, $args);
+}
+
+@mixin fixed($args: "") {
+  @include position(fixed, $args);
+}
+
+@mixin relative($args: "") {
+  @include position(relative, $args);
+}
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: $opacity * 100;
+  filter: alpha(opacity = $opacity-ie); //IE8
+}
+@mixin box($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes #{$animation-name} {
+    @content;
+  }
+  @-moz-keyframes #{$animation-name} {
+    @content;
+  }
+  @-ms-keyframes #{$animation-name} {
+    @content;
+  }
+  @-o-keyframes #{$animation-name} {
+    @content;
+  }
+  @keyframes #{$animation-name} {
+    @content;
+  }
+}
+@mixin animation($str) {
+  -webkit-animation: #{$str};
+  -moz-animation: #{$str};
+  -ms-animation: #{$str};
+  -o-animation: #{$str};
+  animation: #{$str};
+}
+@mixin animation($value) {
+  -webkit-animation: $value;
+  animation: $value;
+}
+
+@mixin animation-delay($value) {
+  -webkit-animation-delay: $value;
+  animation-delay: $value;
+}
+
+@mixin animation-direction($value) {
+  -webkit-animation-direction: $value;
+  animation-direction: $value;
+}
+
+@mixin animation-duration($value) {
+  -webkit-animation-duration: $value;
+  animation-duration: $value;
+}
+
+@mixin animation-fill-mode($value) {
+  -webkit-animation-fill-mode: $value;
+  animation-fill-mode: $value;
+}
+
+@mixin animation-iteration-count($value) {
+  -webkit-animation-iteration-count: $value;
+  animation-iteration-count: $value;
+}
+
+@mixin animation-name($value) {
+  -webkit-animation-name: $value;
+  animation-name: $value;
+}
+
+@mixin animation-play-state($value) {
+  -webkit-animation-play-state: $value;
+  animation-play-state: $value;
+}
+
+@mixin animation-timing-function($value) {
+  -webkit-animation-timing-function: $value;
+  animation-timing-function: $value;
+}
+@mixin css3-prefix($prop, $value) {
+  -webkit-#{$prop}: #{$value};
+  -moz-#{$prop}: #{$value};
+  -ms-#{$prop}: #{$value};
+  -o-#{$prop}: #{$value};
+  #{$prop}: #{$value};
+}
+@mixin box-sizing($box-model) {
+  -webkit-box-sizing: $box-model; // Safari <= 5
+  -moz-box-sizing: $box-model; // Firefox <= 19
+  box-sizing: $box-model;
+}
+@mixin light-hover {
+  cursor: pointer;
+  box-shadow: inset 0 0px 1000px 1000px rgba($white, 0.1), 0 23px 46px 0px rgba($white, 0.1);
+  @include css3-prefix(transition, $animate);
+}
+@mixin light-active {
+  cursor: pointer;
+  box-shadow: inset 0 0 1000px 1000px rgba($white, 0.2), 0 23px 46px 0px rgba($white, 0.2);
+  @include css3-prefix(transition, $animate);
+}
+@mixin dark-hover {
+  cursor: pointer;
+  box-shadow: inset 0 0 1000px 1000px rgba($black, 0.05), 0 23px 46px 0px rgba($black, 0.1);
+  @include css3-prefix(transition, $animate);
+}
+@mixin dark-active {
+  cursor: pointer;
+  box-shadow: inset 0 0 1000px 1000px rgba($black, 0.1), 0 23px 46px 0px rgba($black, 0.2);
+  @include css3-prefix(transition, $animate);
+}
+@mixin button-primary {
+  background-color: $primaryMedium;
+  border: 2px solid $primaryLight;
+  @include css3-prefix(border-radius, 6px);
+  color: $white;
+  font-size: 16px;
+  width: 100%;
+  height: 50px;
+  @include css3-prefix(transition, $animate);
+  @include flex-center;
+}
+@mixin button-primary-transparent {
+  background-color: transparent;
+  border: 2px solid $primary;
+  @include css3-prefix(border-radius, 6px);
+  color: $primary;
+  font-size: 16px;
+  width: 100%;
+  height: 50px;
+  @include css3-prefix(transition, $animate);
+  @include flex-center;
+}
+@mixin button-primary-dark {
+  background-color: $primary;
+  border: 2px solid $primaryMedium;
+  @include css3-prefix(border-radius, 6px);
+  color: $white;
+  font-size: 16px;
+  width: 100%;
+  height: 50px;
+  @include css3-prefix(transition, $animate);
+  @include flex-center;
+}
+@mixin button-secondary {
+  background-color: $secondary;
+  border: 2px solid $secondary;
+  @include css3-prefix(border-radius, 6px);
+  color: $primary;
+  font-size: 16px;
+  width: 100%;
+  height: 50px;
+  @include css3-prefix(transition, $animate);
+  @include flex-center;
+}
+@mixin button-accent {
+  background-color: $accent;
+  border: 2px solid $accent;
+  @include css3-prefix(border-radius, 6px);
+  color: $white;
+  font-size: 16px;
+  width: 100%;
+  height: 50px;
+  @include css3-prefix(transition, $animate);
+  @include flex-center;
+}

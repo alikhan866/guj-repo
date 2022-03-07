@@ -1,0 +1,20 @@
+@import "../../assets/css/global.scss";
+
+.biharSvg {
+  aspect-ratio: 1.62/1;
+  transform: scale(0.8);
+  position: relative;
+  right: 50px;
+}
+
+.biharSvg path {
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+}
+.tippy {
+  color: $white;
+  background-color: $primary;
+}
