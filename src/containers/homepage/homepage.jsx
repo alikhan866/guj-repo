@@ -3,12 +3,17 @@ import classes from "./homepage.module.scss";
 import GujaratMap from "../gujaratMap/gujaratMap";
 import Layout from "../../layout/layout";
 import BootstrapTable from "react-bootstrap-table-next";
-import columns from "../../components/table/tableColumns";
-import axios from "axios";
-
+import { columns } from "../../components/table/tableColumns";
+import paginationFactory from "react-bootstrap-table2-paginator";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 const Homepage = () => {
   const [selectedDistrict, setSelectedDistrict] = useState({});
   const [currentDistrict, setCurrentDistrict] = useState();
+  const [tableData, setTableData] = useState([]);
+  const [tableDataLoading, setTableDataLoading] = useState();
+  const [tableDataError, setTableDataError] = useState();
+  const [tableDataSuccess, setTableDataSuccess] = useState();
   const districtName = [
     "Ahmedabad",
     "Amreli",
@@ -18,7 +23,7 @@ const Homepage = () => {
     "Bharuch",
     "Bhavnagar",
     "Botad",
-    "Chhota-Udaipur",
+    "Chhotaudepur",
     "Dahod",
     "Dangs",
     "Devbhoomi-Dwarka",
@@ -44,6 +49,9 @@ const Homepage = () => {
     "Vadodara",
     "Valsad",
   ];
+
+  console.log("TTTTTTTTTTTTTTT ", tableData);
+
   return (
     <Layout>
       <div className={classes.container}>
@@ -58,22 +66,29 @@ const Homepage = () => {
                 setCurrentDistrict={setCurrentDistrict}
                 setSelectedDistrict={setSelectedDistrict}
                 selectedDistrict={selectedDistrict}
+                tableData={tableData}
+                tableDataLoading={tableDataLoading}
+                tableDataError={tableDataError}
+                tableDataSuccess={tableDataSuccess}
+                setTableData={setTableData}
+                setTableDataLoading={setTableDataLoading}
+                setTableDataError={setTableDataError}
+                setTableDataSuccess={setTableDataSuccess}
               />
             </div>
-            <div className={classes.districtDesc}>
-              <div className={classes.districtName}>{selectedDistrict.districtName}</div>
-              {/* <div className={classes.paragraph}>
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-                labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
-              </div> */}
-              {/* <BootstrapTable keyField="id" data={products} columns={columns} /> */}
-              <div className={classes.btnWrapper}>
-                <button className={classes.primaryTransparentBtn}>
-                  Explore Now<i className="fa-solid fa-arrow-right"></i>
-                </button>
-              </div>
-            </div>
           </div>
+          <div className={classes.districtDesc}>
+            <div className={classes.districtName}>{selectedDistrict.districtName}</div>
+          </div>
+          {tableDataSuccess && !tableDataLoading && tableData?.length !== 0 && (
+            <BootstrapTable
+              keyField="id"
+              data={tableData}
+              columns={columns}
+              bordered
+              pagination={paginationFactory()}
+            />
+          )}
           <div className={classes.districtListWrapper}>
             {districtName.map((name, index) => {
               return (

@@ -4,12 +4,40 @@ import SvgMap from "./svgMap/svgMap";
 import classes from "./gujaratMap.module.scss";
 import axios from "axios";
 
-const getDistrictData = async (district) => {
-  const response = await axios.get(`https://thecodebucket.com/frontend/gujarat/index.php`, { district });
-  console.log(response.data);
-};
+const GujaratMap = ({
+  currentDistrict,
+  setCurrentDistrict,
+  selectedDistrict,
+  setSelectedDistrict,
+  tableData,
+  tableDataLoading,
+  tableDataError,
+  tableDataSuccess,
+  setTableData,
+  setTableDataLoading,
+  setTableDataError,
+  setTableDataSuccess,
+}) => {
+  const getDistrictData = async (district) => {
+    try {
+      setTableDataLoading(true);
+      setTableDataSuccess(false);
+      const formData = new FormData();
+      // if district contains - replace with space
+      const districtName = district.replace(/-/g, " ");
+      formData.append("district", districtName);
+      const response = await axios.post("https://thecodebucket.com/frontend/gujarat/index.php", formData);
+      console.log(response.data.data);
+      setTableData(response.data.data);
+      setTableDataLoading(false);
+      setTableDataSuccess(true);
+    } catch (e) {
+      setTableDataLoading(false);
+      setTableDataError(true);
+      setTableDataSuccess(false);
+    }
+  };
 
-const GujaratMap = ({ currentDistrict, setCurrentDistrict, selectedDistrict, setSelectedDistrict }) => {
   useEffect(() => {
     if (selectedDistrict?.districtName) {
       const selectedDistrictElement = document.getElementById(selectedDistrict.districtName);

@@ -444,7 +444,7 @@ const SvgMap = (props) => (
           plugins={[followCursor]}
           className={classes.tippy}
           hideOnClick={false}
-          content={<span className={classes.tippyContent}>Devbhoomi-Dwarka</span>}
+          content={<span className={classes.tippyContent}>Devbhumi-Dwarka</span>}
         >
           <path
             //   className="cls-2"
@@ -453,7 +453,7 @@ const SvgMap = (props) => (
             onClick={(e) => props.clicked(e.target)}
             onMouseEnter={(e) => props.entered(e.target)}
             onMouseLeave={(e) => props.left(e.target)}
-            id="Devbhoomi-Dwarka"
+            id="Devbhumi-Dwarka"
           />
         </Tippy>
         <path
@@ -507,7 +507,7 @@ const SvgMap = (props) => (
           plugins={[followCursor]}
           className={classes.tippy}
           hideOnClick={false}
-          content={<span className={classes.tippyContent}>Chhota-Udaipur</span>}
+          content={<span className={classes.tippyContent}>Chhotaudepur</span>}
         >
           <path
             //   className="cls-2"
@@ -516,7 +516,7 @@ const SvgMap = (props) => (
             onClick={(e) => props.clicked(e.target)}
             onMouseEnter={(e) => props.entered(e.target)}
             onMouseLeave={(e) => props.left(e.target)}
-            id="Chhota-Udaipur"
+            id="Chhotaudepur"
           />
         </Tippy>
         <path

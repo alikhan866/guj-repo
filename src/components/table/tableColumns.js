@@ -1,4 +1,4 @@
-const columns = [
+export const columns = [
   {
     dataField: "district",
     text: "District",

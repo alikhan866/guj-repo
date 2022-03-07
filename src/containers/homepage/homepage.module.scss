@@ -9,7 +9,7 @@
   width: 80%;
   margin: 0 auto;
   @include flex-center-columns;
-  gap: 30px;
+  gap: 0px;
 }
 .title {
   font-size: 36px;
@@ -34,7 +34,7 @@
 .districtDesc {
   @include flex-center-columns;
   align-items: flex-start;
-  width: 40%;
+  width: 100%;
 }
 .districtName {
   font-size: 36px;
