@@ -2,14 +2,17 @@ import React, { useState, useEffect } from "react";
 import { select } from "d3";
 import SvgMap from "./svgMap/svgMap";
 import classes from "./gujaratMap.module.scss";
+import axios from "axios";
 
-const GujaratMap = ({ selectedDistrict, setSelectedDistrict }) => {
-  const [currentDistrict, setCurrentDistrict] = useState();
+const getDistrictData = async (district) => {
+  const response = await axios.get(`https://thecodebucket.com/frontend/gujarat/index.php`, { district });
+  console.log(response.data);
+};
 
+const GujaratMap = ({ currentDistrict, setCurrentDistrict, selectedDistrict, setSelectedDistrict }) => {
   useEffect(() => {
     if (selectedDistrict?.districtName) {
       const selectedDistrictElement = document.getElementById(selectedDistrict.districtName);
-      console.log(selectedDistrictElement);
       onStateClick(selectedDistrictElement);
     }
     // eslint-disable-next-line
@@ -18,6 +21,7 @@ const GujaratMap = ({ selectedDistrict, setSelectedDistrict }) => {
   useEffect(() => {
     if (currentDistrict) {
       setSelectedDistrict({ districtName: currentDistrict });
+      getDistrictData(currentDistrict);
     }
     // eslint-disable-next-line
   }, [currentDistrict]);
@@ -26,11 +30,9 @@ const GujaratMap = ({ selectedDistrict, setSelectedDistrict }) => {
     // onStateClick("Ahemdabad");
     const element = document.getElementById("Ahmedabad");
     onStateClick(element);
-    console.log("qweqw", element);
   }, []);
 
   const onStateClick = (clickedDistrict) => {
-    console.log(clickedDistrict.getAttribute("id"));
     if (currentDistrict !== clickedDistrict.getAttribute("id")) {
       // setSelectedDistrict({});
       select(`#${currentDistrict}`).attr("fill", "#FCFCFC").transition().duration(500).attr("filter", "");

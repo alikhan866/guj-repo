@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import classes from "./homepage.module.scss";
 import GujaratMap from "../gujaratMap/gujaratMap";
 import Layout from "../../layout/layout";
+import BootstrapTable from "react-bootstrap-table-next";
+import columns from "../../components/table/tableColumns";
+import axios from "axios";
 
 const Homepage = () => {
   const [selectedDistrict, setSelectedDistrict] = useState({});
+  const [currentDistrict, setCurrentDistrict] = useState();
   const districtName = [
     "Ahmedabad",
     "Amreli",
@@ -49,14 +53,20 @@ const Homepage = () => {
           </div>
           <div className={classes.districtWrapper}>
             <div className={classes.districtMap}>
-              <GujaratMap setSelectedDistrict={setSelectedDistrict} selectedDistrict={selectedDistrict} />
+              <GujaratMap
+                currentDistrict={currentDistrict}
+                setCurrentDistrict={setCurrentDistrict}
+                setSelectedDistrict={setSelectedDistrict}
+                selectedDistrict={selectedDistrict}
+              />
             </div>
             <div className={classes.districtDesc}>
               <div className={classes.districtName}>{selectedDistrict.districtName}</div>
-              <div className={classes.paragraph}>
+              {/* <div className={classes.paragraph}>
                 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
                 labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
-              </div>
+              </div> */}
+              {/* <BootstrapTable keyField="id" data={products} columns={columns} /> */}
               <div className={classes.btnWrapper}>
                 <button className={classes.primaryTransparentBtn}>
                   Explore Now<i className="fa-solid fa-arrow-right"></i>
